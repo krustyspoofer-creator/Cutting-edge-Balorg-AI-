@@ -26,6 +26,16 @@ class BalorgAI:
         self.deep_learning_topics = self._load_deep_learning_knowledge()
         self.optimization_topics = self._load_optimization_knowledge()
         self.application_topics = self._load_application_knowledge()
+        
+        # Cache combined knowledge for performance
+        self._all_knowledge = {
+            **self.deep_learning_topics,
+            **self.optimization_topics,
+            **self.application_topics
+        }
+        
+        # Cache combined topics list for random selection
+        self._all_topics_list = list(self._all_knowledge.items())
     
     def _load_deep_learning_knowledge(self):
         """Load deep learning architecture knowledge."""
@@ -432,6 +442,23 @@ Advanced Topics:
             }
         }
     
+    def _format_topic_response(self, topic_data):
+        """
+        Format topic data into a response string.
+        
+        Args:
+            topic_data (dict): Topic data with 'title' and 'content' keys
+            
+        Returns:
+            str: Formatted response
+        """
+        response = f"\n{'='*70}\n"
+        response += f"{topic_data['title']}\n"
+        response += f"{'='*70}\n"
+        response += topic_data['content']
+        response += f"\n{'='*70}\n"
+        return response
+    
     def detect_trigger(self, user_input):
         """
         Detect if the trigger phrase is present in user input.
@@ -451,22 +478,9 @@ Advanced Topics:
         Returns:
             str: Formatted technical information
         """
-        # Combine all topics
-        all_topics = []
-        all_topics.extend(list(self.deep_learning_topics.items()))
-        all_topics.extend(list(self.optimization_topics.items()))
-        all_topics.extend(list(self.application_topics.items()))
-        
-        # Select random topic
-        topic_key, topic_data = random.choice(all_topics)
-        
-        response = f"\n{'='*70}\n"
-        response += f"{topic_data['title']}\n"
-        response += f"{'='*70}\n"
-        response += topic_data['content']
-        response += f"\n{'='*70}\n"
-        
-        return response
+        # Select random topic from cached list
+        topic_key, topic_data = random.choice(self._all_topics_list)
+        return self._format_topic_response(topic_data)
     
     def get_topic_by_keyword(self, keyword):
         """
@@ -480,47 +494,23 @@ Advanced Topics:
         """
         keyword_lower = keyword.lower()
         
-        # Search in all knowledge bases
-        all_knowledge = {
-            **self.deep_learning_topics,
-            **self.optimization_topics,
-            **self.application_topics
-        }
+        # Use cached combined knowledge
+        all_knowledge = self._all_knowledge
         
         # First priority: exact match in topic key
         if keyword_lower in all_knowledge:
-            topic_data = all_knowledge[keyword_lower]
-            response = f"\n{'='*70}\n"
-            response += f"{topic_data['title']}\n"
-            response += f"{'='*70}\n"
-            response += topic_data['content']
-            response += f"\n{'='*70}\n"
-            return response
+            return self._format_topic_response(all_knowledge[keyword_lower])
         
         # Second priority: match in topic key or title
         for topic_key, topic_data in all_knowledge.items():
             if (keyword_lower in topic_key.lower() or 
                 keyword_lower in topic_data['title'].lower()):
-                
-                response = f"\n{'='*70}\n"
-                response += f"{topic_data['title']}\n"
-                response += f"{'='*70}\n"
-                response += topic_data['content']
-                response += f"\n{'='*70}\n"
-                
-                return response
+                return self._format_topic_response(topic_data)
         
         # Third priority: match in content
         for topic_key, topic_data in all_knowledge.items():
             if keyword_lower in topic_data['content'].lower():
-                
-                response = f"\n{'='*70}\n"
-                response += f"{topic_data['title']}\n"
-                response += f"{'='*70}\n"
-                response += topic_data['content']
-                response += f"\n{'='*70}\n"
-                
-                return response
+                return self._format_topic_response(topic_data)
         
         return None
     

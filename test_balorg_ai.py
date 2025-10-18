@@ -4,7 +4,6 @@ Test suite for Balorg AI system.
 """
 
 import unittest
-from unittest.mock import patch
 from balorg_ai import BalorgAI
 
 
