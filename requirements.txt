@@ -1,0 +1,17 @@
+# Balorg AI - Core Dependencies
+# Python 3.7+ required
+
+# No external dependencies required for core functionality
+# The framework is designed to be lightweight and dependency-free
+
+# Optional dependencies for enhanced functionality:
+# numpy>=1.19.0
+# torch>=1.9.0
+# transformers>=4.0.0
+
+# Development dependencies (install with: pip install -e ".[dev]")
+# pytest>=7.0
+# pytest-cov>=3.0
+# black>=22.0
+# flake8>=4.0
+# mypy>=0.950
