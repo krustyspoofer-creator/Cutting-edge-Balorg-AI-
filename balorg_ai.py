@@ -127,11 +127,15 @@ class BalorgAI:
             f"{self.author_info['birth_year']}, {self.author_info['birthplace']}"
         )
         
-        with open(filename, 'w', encoding='utf-8') as f:
-            json.dump(output, f, indent=2)
-        
-        print(f"Output saved to {filename}")
-        print(f"Created by: {self.author_info['name']}")
+        try:
+            with open(filename, 'w', encoding='utf-8') as f:
+                json.dump(output, f, indent=2)
+            
+            print(f"Output saved to {filename}")
+            print(f"Created by: {self.author_info['name']}")
+        except (FileNotFoundError, PermissionError, IOError) as e:
+            print(f"Error saving output to {filename}: {e}", file=sys.stderr)
+            raise
 
 
 def print_banner():
