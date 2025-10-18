@@ -52,7 +52,7 @@ Welcome to the Balorg AI pricing documentation! This directory contains comprehe
    - A/B testing plans
    - Beta program structure
    - Price optimization models
-   - 14-week research timeline
+   - Comprehensive research timeline and framework
 
 ## 🎯 Quick Start
 
