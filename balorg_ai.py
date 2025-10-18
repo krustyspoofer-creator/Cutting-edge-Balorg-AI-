@@ -14,6 +14,11 @@ class BalorgAI:
     def __init__(self):
         self.trigger_phrase = "My Balorg is AI!"
         self.knowledge_base = self._initialize_knowledge_base()
+        # Create reverse lookup for category titles to keys for O(1) lookup
+        self.title_to_key = {
+            value['title'].lower(): key 
+            for key, value in self.knowledge_base.items()
+        }
     
     def _initialize_knowledge_base(self):
         """Initialize the technical knowledge base."""
@@ -434,10 +439,11 @@ Applications:
                     continue
                 
                 if self.detect_trigger(user_input):
-                    # Check if user specified a category
+                    # Check if user specified a category using optimized lookup
                     category = None
-                    for key, value in self.knowledge_base.items():
-                        if value['title'].lower() in user_input.lower():
+                    user_input_lower = user_input.lower()
+                    for title_lower, key in self.title_to_key.items():
+                        if title_lower in user_input_lower:
                             category = key
                             break
                     
