@@ -1,0 +1,40 @@
+# Core Deep Learning Framework
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Transformer Models and NLP
+transformers>=4.30.0
+tokenizers>=0.13.0
+sentencepiece>=0.1.99
+
+# Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+pillow>=9.5.0
+scipy>=1.10.0
+
+# Training Utilities
+accelerate>=0.20.0
+datasets>=2.12.0
+evaluate>=0.4.0
+
+# Optimization
+bitsandbytes>=0.39.0
+optimum>=1.8.0
+
+# Monitoring and Visualization
+tensorboard>=2.13.0
+wandb>=0.15.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# API and Deployment
+fastapi>=0.95.0
+uvicorn>=0.22.0
+pydantic>=1.10.0
+
+# Utilities
+tqdm>=4.65.0
+python-dotenv>=1.0.0
+pyyaml>=6.0
