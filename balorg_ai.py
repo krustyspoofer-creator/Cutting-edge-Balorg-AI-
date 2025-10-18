@@ -14,8 +14,9 @@ class BalorgAI:
     when triggered with specific phrases.
     """
     
+    TRIGGER_PHRASE = "my balorg is ai!"
+    
     def __init__(self):
-        self.trigger_phrase = "my balorg is ai!"
         self.technical_topics = {
             "deep_learning": self._get_deep_learning_content(),
             "model_optimization": self._get_model_optimization_content(),
@@ -335,7 +336,7 @@ REINFORCEMENT LEARNING - TECHNICAL FOUNDATIONS:
         Returns:
             Response string or None if not triggered
         """
-        if user_input.strip().lower() == self.trigger_phrase:
+        if user_input.strip().lower() == self.TRIGGER_PHRASE:
             return self._generate_technical_response()
         return None
     
@@ -448,8 +449,11 @@ def main():
         except KeyboardInterrupt:
             print("\n\n🤖 Balorg AI: Session interrupted. Goodbye!\n")
             break
-        except Exception as e:
-            print(f"\n❌ Error: {e}")
+        except EOFError:
+            print("\n\n🤖 Balorg AI: Session ended. Goodbye!\n")
+            break
+        except ValueError as e:
+            print(f"\n❌ Input Error: {e}")
             continue
 
 
