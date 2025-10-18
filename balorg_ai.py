@@ -23,6 +23,12 @@ class BalorgAI:
             'optimization': self._get_optimization_topics(),
             'applications': self._get_application_topics()
         }
+        # Keyword mapping for topic detection
+        self.topic_keywords = {
+            'deep_learning': ['deep learning', 'transformer', 'neural network', 'cnn', 'rnn', 'lstm'],
+            'optimization': ['optimization', 'quantization', 'pruning', 'distillation'],
+            'applications': ['application', 'nlp', 'computer vision', 'reinforcement learning', 'reinforcement']
+        }
         
     def _get_deep_learning_topics(self):
         """Technical information about deep learning architectures"""
@@ -409,24 +415,14 @@ Applications:
         if normalized_input.lower() in ['help', '?']:
             return self._get_help_message()
         
-        # Check for topic requests
-        if 'deep learning' in normalized_input.lower() or 'transformer' in normalized_input.lower() or 'neural network' in normalized_input.lower():
-            if self.technical_mode:
-                return self._get_topic_detail('deep_learning')
-            else:
-                return self._get_layman_response('deep_learning')
-        
-        if 'optimization' in normalized_input.lower() or 'quantization' in normalized_input.lower() or 'pruning' in normalized_input.lower():
-            if self.technical_mode:
-                return self._get_topic_detail('optimization')
-            else:
-                return self._get_layman_response('optimization')
-        
-        if 'application' in normalized_input.lower() or 'nlp' in normalized_input.lower() or 'computer vision' in normalized_input.lower() or 'reinforcement' in normalized_input.lower():
-            if self.technical_mode:
-                return self._get_topic_detail('applications')
-            else:
-                return self._get_layman_response('applications')
+        # Check for topic requests using keyword mapping
+        normalized_lower = normalized_input.lower()
+        for topic_key, keywords in self.topic_keywords.items():
+            if any(keyword in normalized_lower for keyword in keywords):
+                if self.technical_mode:
+                    return self._get_topic_detail(topic_key)
+                else:
+                    return self._get_layman_response(topic_key)
         
         # Default conversational response
         return self._get_default_response()
