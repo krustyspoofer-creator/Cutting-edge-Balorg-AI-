@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balorg AI - Pricing Plans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .billing-toggle {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .toggle-label {
+            font-size: 1.1em;
+            margin: 0 15px;
+            color: #333;
+        }
+
+        .save-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .pricing-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: white;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .pricing-card.featured {
+            border-color: #667eea;
+            border-width: 3px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .plan-price span {
+            font-size: 0.4em;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .plan-description {
+            color: #666;
+            margin-bottom: 20px;
+            min-height: 40px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+            color: #555;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: opacity 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            opacity: 0.9;
+        }
+
+        .cta-button.secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .discounts-section {
+            background: #f9fafb;
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 50px;
+        }
+
+        .discounts-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .discount-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .discount-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .discount-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .discount-percentage {
+            font-size: 2em;
+            font-weight: bold;
+            color: #10b981;
+            margin: 10px 0;
+        }
+
+        .discount-card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .faq-section {
+            margin-top: 50px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .faq-answer {
+            color: #666;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e5e7eb;
+            color: #666;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Balorg AI Pricing</h1>
+            <p class="subtitle">Choose the perfect plan for your AI needs</p>
+        </header>
+
+        <div class="billing-toggle">
+            <span class="toggle-label">Monthly</span>
+            <span class="toggle-label"><strong>Annual</strong> <span class="save-badge">Save 20%</span></span>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Free Tier -->
+            <div class="pricing-card">
+                <h2 class="plan-name">Free</h2>
+                <div class="plan-price">$0<span>/month</span></div>
+                <p class="plan-description">Perfect for trying out Balorg AI</p>
+                <ul class="features-list">
+                    <li>1,000 API calls/month</li>
+                    <li>Basic AI features</li>
+                    <li>Community support</li>
+                    <li>Standard response time</li>
+                    <li>Access to documentation</li>
+                </ul>
+                <button class="cta-button secondary">Get Started</button>
+            </div>
+
+            <!-- Starter Tier -->
+            <div class="pricing-card">
+                <h2 class="plan-name">Starter</h2>
+                <div class="plan-price">$19<span>/month</span></div>
+                <p class="plan-description">For individuals and small projects</p>
+                <ul class="features-list">
+                    <li>10,000 API calls/month</li>
+                    <li>Standard AI features</li>
+                    <li>Email support (24-48h)</li>
+                    <li>Basic analytics dashboard</li>
+                    <li>API access</li>
+                    <li>Commercial use allowed</li>
+                </ul>
+                <button class="cta-button">Start Free Trial</button>
+            </div>
+
+            <!-- Professional Tier -->
+            <div class="pricing-card featured">
+                <div class="featured-badge">Most Popular</div>
+                <h2 class="plan-name">Professional</h2>
+                <div class="plan-price">$99<span>/month</span></div>
+                <p class="plan-description">For growing teams and businesses</p>
+                <ul class="features-list">
+                    <li>100,000 API calls/month</li>
+                    <li>Advanced AI features</li>
+                    <li>Priority support (12-24h)</li>
+                    <li>Advanced analytics</li>
+                    <li>Multiple API keys</li>
+                    <li>Custom model fine-tuning</li>
+                    <li>Team collaboration (5 users)</li>
+                </ul>
+                <button class="cta-button">Start Free Trial</button>
+            </div>
+
+            <!-- Enterprise Tier -->
+            <div class="pricing-card">
+                <h2 class="plan-name">Enterprise</h2>
+                <div class="plan-price">Custom</div>
+                <p class="plan-description">For large organizations with specific needs</p>
+                <ul class="features-list">
+                    <li>Unlimited API calls</li>
+                    <li>All advanced features</li>
+                    <li>24/7 dedicated support</li>
+                    <li>Custom SLA agreements</li>
+                    <li>On-premise deployment</li>
+                    <li>Advanced fine-tuning</li>
+                    <li>Unlimited team members</li>
+                    <li>Custom integrations</li>
+                </ul>
+                <button class="cta-button">Contact Sales</button>
+            </div>
+        </div>
+
+        <!-- Discounts Section -->
+        <div class="discounts-section">
+            <h2>💰 Special Discounts Available</h2>
+            <div class="discount-grid">
+                <div class="discount-card">
+                    <h3>🎓 Students</h3>
+                    <div class="discount-percentage">50% OFF</div>
+                    <p>Valid with student email or ID. Annual verification required.</p>
+                </div>
+
+                <div class="discount-card">
+                    <h3>🌟 Non-Profits</h3>
+                    <div class="discount-percentage">40% OFF</div>
+                    <p>Supporting organizations making social impact. 501(c)(3) verification required.</p>
+                </div>
+
+                <div class="discount-card">
+                    <h3>🚀 Early Adopters</h3>
+                    <div class="discount-percentage">30% OFF</div>
+                    <p>First year discount for first 1,000 sign-ups. Limited time offer!</p>
+                </div>
+
+                <div class="discount-card">
+                    <h3>👥 Bulk Subscriptions</h3>
+                    <div class="discount-percentage">Up to 35% OFF</div>
+                    <p>5+ seats: 15% | 10+ seats: 25% | 25+ seats: 35% discount</p>
+                </div>
+
+                <div class="discount-card">
+                    <h3>🌍 Income-Based</h3>
+                    <div class="discount-percentage">Variable</div>
+                    <p>Sliding scale discounts available. Making AI accessible globally.</p>
+                </div>
+
+                <div class="discount-card">
+                    <h3>🎁 Referral Program</h3>
+                    <div class="discount-percentage">$10 Credit</div>
+                    <p>Give $10, Get $10 credit. Unlimited referrals to grow together!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I change plans at any time?</div>
+                <div class="faq-answer">Yes! You can upgrade or downgrade your plan at any time. Upgrades take effect immediately, while downgrades take effect at the end of your current billing cycle. Prorated refunds are provided for downgrades.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What payment methods do you accept?</div>
+                <div class="faq-answer">We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for Enterprise plans. All payments are processed securely.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is there a free trial available?</div>
+                <div class="faq-answer">Yes! All paid plans come with a 14-day free trial. No credit card required to start. You can explore all features before committing.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens if I exceed my API call limit?</div>
+                <div class="faq-answer">We'll notify you when you reach 80% of your limit. If you exceed it, you can either upgrade your plan or purchase additional API calls at $0.002 per call.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do you offer refunds?</div>
+                <div class="faq-answer">Yes, we offer a 30-day money-back guarantee for annual plans. Monthly plans can be cancelled at any time with prorated refunds for unused time.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How do I apply for a discount?</div>
+                <div class="faq-answer">Contact our sales team at pricing@balorg-ai.com with verification documents (student ID, non-profit status, etc.). We'll review and apply discounts within 24-48 hours.</div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Price Lock Guarantee:</strong> Your pricing stays the same for 12 months. We'll notify you 30 days before any increases.</p>
+            <div class="contact-info">
+                <p>Questions about pricing? Contact us at <strong>pricing@balorg-ai.com</strong></p>
+                <p>Need help choosing a plan? <strong>Schedule a demo</strong> with our team.</p>
+            </div>
+            <p style="margin-top: 20px; color: #999;">© 2025 Balorg AI. All rights reserved. | <a href="#" style="color: #667eea;">Terms of Service</a> | <a href="#" style="color: #667eea;">Privacy Policy</a></p>
+        </footer>
+    </div>
+</body>
+</html>
