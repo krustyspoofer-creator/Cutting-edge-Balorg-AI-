@@ -74,10 +74,26 @@ def run_conversational_demo():
     
     try:
         import subprocess
-        subprocess.run([sys.executable, "examples/conversational_ai.py", "--demo"])
+        import os
+        
+        demo_path = "examples/conversational_ai.py"
+        if not os.path.exists(demo_path):
+            print(f"\n✗ Error: Demo file not found: {demo_path}")
+            return False
+        
+        result = subprocess.run(
+            [sys.executable, demo_path, "--demo"],
+            capture_output=False
+        )
+        
+        if result.returncode != 0:
+            print(f"\n✗ Demo exited with code {result.returncode}")
+            return False
+        
         return True
     except Exception as e:
-        print(f"\n✗ Error: {e}")
+        print(f"\n✗ Error running demo: {e}")
+        print("Make sure dependencies are installed: pip install -r requirements.txt")
         return False
 
 
@@ -89,10 +105,26 @@ def run_content_generation_demo():
     
     try:
         import subprocess
-        subprocess.run([sys.executable, "examples/content_generation.py"])
+        import os
+        
+        demo_path = "examples/content_generation.py"
+        if not os.path.exists(demo_path):
+            print(f"\n✗ Error: Demo file not found: {demo_path}")
+            return False
+        
+        result = subprocess.run(
+            [sys.executable, demo_path],
+            capture_output=False
+        )
+        
+        if result.returncode != 0:
+            print(f"\n✗ Demo exited with code {result.returncode}")
+            return False
+        
         return True
     except Exception as e:
-        print(f"\n✗ Error: {e}")
+        print(f"\n✗ Error running demo: {e}")
+        print("Make sure dependencies are installed: pip install -r requirements.txt")
         return False
 
 
@@ -104,10 +136,26 @@ def run_qa_demo():
     
     try:
         import subprocess
-        subprocess.run([sys.executable, "examples/question_answering.py"])
+        import os
+        
+        demo_path = "examples/question_answering.py"
+        if not os.path.exists(demo_path):
+            print(f"\n✗ Error: Demo file not found: {demo_path}")
+            return False
+        
+        result = subprocess.run(
+            [sys.executable, demo_path],
+            capture_output=False
+        )
+        
+        if result.returncode != 0:
+            print(f"\n✗ Demo exited with code {result.returncode}")
+            return False
+        
         return True
     except Exception as e:
-        print(f"\n✗ Error: {e}")
+        print(f"\n✗ Error running demo: {e}")
+        print("Make sure dependencies are installed: pip install -r requirements.txt")
         return False
 
 
