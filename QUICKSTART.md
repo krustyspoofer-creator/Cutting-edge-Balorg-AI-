@@ -178,7 +178,7 @@ python examples/optimization_demo.py
 # Interactive technical mode
 python examples/technical_mode_demo.py
 
-# Complete demonstration
+# Complete non-interactive demonstration
 python demo_technical_mode_full.py
 ```
 
@@ -258,7 +258,9 @@ print(tech_mode.get_application_details('nlp'))
 1. **Read the Technical Guide**: [TECHNICAL_GUIDE.md](TECHNICAL_GUIDE.md)
 2. **Check API Reference**: [API_REFERENCE.md](API_REFERENCE.md)
 3. **Explore Examples**: Browse the `examples/` directory
-4. **Run Tests**: `python test_technical_mode.py`
+4. **Run Tests**: 
+   - Unit tests: `python test_technical_mode.py`
+   - Integration tests: `python test_integration.py`
 
 ## Tips
 
