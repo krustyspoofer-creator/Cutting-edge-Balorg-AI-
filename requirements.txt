@@ -1,0 +1,27 @@
+# Core deep learning framework
+torch>=2.0.0
+transformers>=4.30.0
+
+# Data processing and utilities
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Model training and optimization
+accelerate>=0.20.0
+bitsandbytes>=0.41.0
+
+# Tokenization and NLP
+tokenizers>=0.13.0
+sentencepiece>=0.1.99
+
+# Configuration and logging
+pyyaml>=6.0
+tqdm>=4.65.0
+
+# API and interface
+flask>=2.3.0
+requests>=2.31.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
